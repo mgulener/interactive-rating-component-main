@@ -41,14 +41,19 @@ Users should be able to:
 
 To see how you can add code snippets, see below:
 
+Add event to html element
 ```html
 <button className="rating-vote-button" onClick={voteClick}>1</button>
 ```
+
+Scss Gradient
 ```css
 .gradient {
   background: linear-gradient(180deg, $blue, $darkBlue);
 }
 ```
+
+React Hook useState
 ```js
 const [vote, setVote] = useState(0);
 ```
