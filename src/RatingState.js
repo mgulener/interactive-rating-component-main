@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 export default function RatingState() {
   const [vote, setVote] = useState(0);
+  const [success, setSuccess] = useState(false);
 
   const voteClick = (e) => {
     const $target = e.currentTarget;
@@ -15,18 +16,12 @@ export default function RatingState() {
   }
 
   const voteSubmit = () => {
-    if (vote > 0) {
-      const $success = document.querySelector('.js-rating-success');
-      const $state = document.querySelector('.js-rating-state');
-
-      $success.classList.remove('hidden');
-      $state.classList.add('hidden');
-    }
+    vote > 0 ? setSuccess(true) : setSuccess(false);
   };
 
   return (
     <>
-      <div className="rating-state js-rating-state">
+      <div className={`rating-state js-rating-state ${success ? 'hidden' : ''}`}>
         <div className="rating-icon">
           <img src="./images/icon-star.svg" alt="icon start" />
         </div>
@@ -44,7 +39,7 @@ export default function RatingState() {
         <button className="rating-submit" onClick={voteSubmit}>SUBMIT</button>
       </div>
 
-      <div className="rating-success js-rating-success hidden">
+      <div className={`rating-success js-rating-success ${!success ? 'hidden' : ''}`}>
         <div className="rating-success-image">
           <img src="./images/illustration-thank-you.svg" alt="success" />
         </div>
