@@ -4,16 +4,33 @@ export default function RatingState() {
   const [vote, setVote] = useState(0);
   const [success, setSuccess] = useState(false);
 
-  const voteClick = (e) => {
-    const $target = e.currentTarget;
-    const $activeTarget = document.querySelector('.rating-vote-button.active');
-    const vote = parseInt($target.innerHTML);
-
-    $activeTarget?.classList.remove('active');
-    $target.classList.add('active');
-
-    setVote(vote);
-  }
+  const votes = [
+    {
+      id: 1,
+      value: 1,
+      label: '1'
+    },
+    {
+      id: 2,
+      value: 2,
+      label: '2'
+    },
+    {
+      id: 3,
+      value: 3,
+      label: '3'
+    },
+    {
+      id: 4,
+      value: 4,
+      label: '4'
+    },
+    {
+      id: 5,
+      value: 5,
+      label: '5'
+    }
+  ]
 
   const voteSubmit = () => {
     vote > 0 ? setSuccess(true) : setSuccess(false);
@@ -30,11 +47,17 @@ export default function RatingState() {
           Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!
         </p>
         <div className="rating-vote-buttons">
-          <button className="rating-vote-button" onClick={voteClick}>1</button>
-          <button className="rating-vote-button" onClick={voteClick}>2</button>
-          <button className="rating-vote-button" onClick={voteClick}>3</button>
-          <button className="rating-vote-button" onClick={voteClick}>4</button>
-          <button className="rating-vote-button" onClick={voteClick}>5</button>
+          {votes.map((voteItem) => {
+            return (
+              <button
+                key = {voteItem.id}
+                className = {`rating-vote-button ${voteItem.value === vote ? 'active' : ''}`}
+                onClick = {() => setVote(voteItem.value)}
+              >
+                {voteItem.label}
+              </button>
+            )
+          })}
         </div>
         <button className="rating-submit" onClick={voteSubmit}>SUBMIT</button>
       </div>
